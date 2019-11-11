@@ -22,3 +22,4 @@ Reviews
 
 cUrl commands:
 curl -v -H "Content-Type: application/json" -d '{"players": "many"}' -X POST localhost:3000/cardgame
+curl -v -H "Content-Type: application/json" -d '{"name": "Poker", "cardGameId": "5dc8b1c197bb1c5cf009c2c1"}' -X POST localhost:3000/gamefamily
