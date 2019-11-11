@@ -1,0 +1,24 @@
+Name / PW for db -- GEP - poker123
+
+# Note for structure of project data
+
+CardGames
+	* players: ENUM(’single’, ‘double’, ’triple’, ‘four’, ‘many’)
+	* family: <array> [ { GameFamily }… ]
+
+GameFamily
+	* family: <string> ‘Poker'
+	* variants: <array> [ { Games } ]
+
+GamesVariant
+	* name: <string> ‘5-card stud’
+	* rules: <string>
+	* reviews: <array> [ Reviews ]
+
+Reviews
+	* title: <string> ’This game Rules!'
+	* body: <string> ’This game really rules and a bunch of other stuff!'
+	* review: ENUM(1, 2, 3, 4, 5)
+
+cUrl commands:
+curl -v -H "Content-Type: application/json" -d '{"players": "many"}' -X POST localhost:3000/cardgame

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const Game = mongoose.model(
-    "Game",
+const GameVariant = mongoose.model(
+    "GameVariant",
     new mongoose.Schema({
         name: {type: String, require: true},
         rules: {type: String, required: true},
@@ -9,4 +9,4 @@ const Game = mongoose.model(
     })
 )
 
-module.exporst = Game;
+module.exporst = GameVariant;

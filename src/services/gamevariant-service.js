@@ -1,5 +1,6 @@
 const GameVariant = require('../models/GameVariant');
-const gameFamilyService = require("../service/gamefamily-service");
+const gameFamilyService = require("../services/gamefamily-service");
+
 
 module.exports = {
     async save(gameVariant) {

@@ -1,56 +1,33 @@
-const CardGame = require('../models/CardGame');
-const gameFamilyService = require("../service/gamefamily-service");
+const cardGameService = require('../services/cardgame-service');
+const gameVariantService = require("../services/gamevariant-service");
 
 module.exports = {
-    async save(artist) {
-        try {
-            const newCardGame = new CardGame(artist)
-            await newCardGame.save();
-            return newCardGame;
-        } catch (err) {
-            return err;
-        }
 
-    },
-    async findAll() {
+    async addNewCardGame(req, res) {
         try {
-            const artists = await CardGame.find();
-            return artists
+            const newCardGame = await cardGameService.save({players: req.body.players})
+            res.json({newCardGame});
         } catch (error) {
-            return error
+            res.json({error});
         }
     },
-    async findById(id) {
+
+    async getAllCardGames(req, res) {
         try {
-            const artist = await CardGame.findById(id);
-            return artist
+            const cardGames = await cardGameService.findAll();
+            res.json({cardGames});
         } catch (error) {
-            return error
+            res.json({error});
         }
-    }, 
-    async updateArtist(artistId, artistUpdates={}){
+    },
+
+    async findCardGameById(req, res) {
         try {
-            const updateArtist = await CardGame.findByIdAndUpdate(artistId, artistUpdates, {new: true});
-            return updateArtist;
-        } catch (err) {
-            return err;
-        }
-    }, 
-    async deleteArtist(artistId){
-        try{
-            const artistToDelete = await CardGame.findById(artistId);
-            // await artistToDelete.songs.pullAll();
-            const albumArray = artistToDelete.albums;
-            await gameFamilyService.removeMany(albumArray);
-            await artistToDelete.remove();
-
-            const response = artistToDelete.save();
-            return response;
-            // const artistToDelete = await Artist.findByIdAndRemove(artistId);
-            // return artistToDelete;
-        }catch(err){
-            console.log(err)
-
+            const cardGame = await cardGameService.findById(req.params.id);
+            res.json({cardGame})
+        } catch (error) {
+            res.json({error});
         }
     }
-};
+
+}

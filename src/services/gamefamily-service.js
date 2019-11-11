@@ -1,11 +1,14 @@
 const GameFamily = require('../models/GameFamily');
-const gameVariantService = require("../service/game-service");
+
+const gameVariantService = require("./gamevariant-service");
+const cardGameService = require('./cardgame-service');
 
 module.exports = {
-    async save(gameFamily) {
+    async addGameFamily(gameFamily, cardGameId) {
         try {
             const newGameFamily = new GameFamily(gameFamily)
             await newGameFamily.save();
+            const updatedGame = await cardGameService.addCardFamily(cardGameId, newGameFamily)
             return newGameFamily;
         } catch (err) {
             return err;

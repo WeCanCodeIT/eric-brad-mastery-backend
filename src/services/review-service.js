@@ -1,5 +1,5 @@
 const Review = require('../models/Review');
-const gameVariantService = require("../service/gamefamily-service");
+const gameVariantService = require("../services/gamefamily-service");
 
 module.exports = {
     async save(review) {

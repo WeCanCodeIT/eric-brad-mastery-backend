@@ -1,7 +1,21 @@
+const mongoose = require('mongoose');
 const CardGame = require('../models/CardGame');
-const gameFamilyService = require("../service/gamefamily-service");
+const gameFamilyService = require("../services/gamefamily-service");
 
 module.exports = {
+    async addCardFamily(cardGameId, newGameFamily) {
+        console.log(cardGameId, newGameFamily)
+        try {
+            const cardGame = await CardGame.findById(cardGameId);
+            console.log(cardGame)
+            await cardGame.family.push(newGameFamily);
+            await cardGame.save();
+            return cardGame;
+        } catch(error) {
+            return error;
+        }
+    },
+
     async save(cardGame) {
         try {
             const newCardGame = new CardGame(cardGame)
