@@ -4,14 +4,37 @@ module.exports = {
 
     async addNewGameFamily(req, res) {
         try {
-            console.log(req.body.cardGameId);
+            const {familyName, cardGameId} = req.body;
+            console.log(familyName, cardGameId);
             const newGameFamily = await gameFamilyService.addGameFamily({
-                name: req.body.name
-            }, req.body.cardGameId)
+                name: familyName
+            }, cardGameId)
+            console.log(newGameFamily);
             res.json({newGameFamily});
 
         } catch(error) {
-            res.json({error});
+            res.json({error: error});
+        }
+    },
+
+    async getAllGameFamilies(req, res) {
+        try {
+            const gameFamilies = await gameFamilyService.findAll();
+            res.json({gameFamilies})
+
+        } catch (error) {
+            res.json({error: error});
+        }
+    },
+
+    async findGameFamilyById(req, res) {
+        const id = (req.body.id) ? req.body.id : req.params.id
+        try {
+            const gameFamily = await gameFamilyService.findById(id);
+            res.json({gameFamily})
+
+        } catch (error) {
+            res.json({error: error});
         }
     }
 

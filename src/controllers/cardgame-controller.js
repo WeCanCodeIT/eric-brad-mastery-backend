@@ -22,8 +22,9 @@ module.exports = {
     },
 
     async findCardGameById(req, res) {
+        const id = (req.body.id) ? req.body.id : req.params.id
         try {
-            const cardGame = await cardGameService.findById(req.params.id);
+            const cardGame = await cardGameService.findById(id);
             res.json({cardGame})
         } catch (error) {
             res.json({error});
