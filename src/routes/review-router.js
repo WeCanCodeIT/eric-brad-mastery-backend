@@ -3,11 +3,11 @@ const router = express.Router();
 const reviewController = require('../controllers/review-controller');
 
 
-router.get("/all", );
+router.get("/all?", reviewController.findAllReviews);
 
-router.get("/:id", );
+router.get("/:id", reviewController.findReviewById);
 
-router.post("/", );
+router.post("/", reviewController.addReview);
 
 
 

@@ -23,7 +23,7 @@ module.exports = {
     },
 
     async findGameVariantById(req, res) {
-        const id = (req.body.id) ? req.body.id : req.params.id
+        const id = (req.query.id) ? req.query.id : req.params.id
         try {
             const gameVariant = await gameVariantService.findById(id);
             res.json({gameVariant})

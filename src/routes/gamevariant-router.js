@@ -3,11 +3,11 @@ const router = express.Router();
 const gameVariantController = require('../controllers/gamevariant-controller');
 
 
-router.get("/all", gameVariantController.getAllGameVariants);
+router.get("/all?", gameVariantController.getAllGameVariants);
 
 router.get("/:id", gameVariantController.findGameVariantById);
 
-router.post("/", gameVariantController.newGameVariant);
+router.post("/", gameVariantController.addNewGameVariant);
 
 
 

@@ -9,4 +9,4 @@ const GameVariant = mongoose.model(
     })
 )
 
-module.exporst = GameVariant;
+module.exports = GameVariant;

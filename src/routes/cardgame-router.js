@@ -3,7 +3,7 @@ const router = express.Router();
 const cardGameController = require('../controllers/cardgame-controller');
 
 
-router.get("/all", cardGameController.getAllCardGames);
+router.get("/all?", cardGameController.getAllCardGames);
 
 router.get("/:id", cardGameController.findCardGameById);
 

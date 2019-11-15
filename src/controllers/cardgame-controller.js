@@ -2,7 +2,7 @@ const cardGameService = require('../services/cardgame-service');
 const gameVariantService = require("../services/gamevariant-service");
 
 module.exports = {
-
+    
     async addNewCardGame(req, res) {
         try {
             const newCardGame = await cardGameService.save({players: req.body.players})
@@ -22,7 +22,7 @@ module.exports = {
     },
 
     async findCardGameById(req, res) {
-        const id = (req.body.id) ? req.body.id : req.params.id
+        const id = (req.query.id) ? req.query.id : req.params.id
         try {
             const cardGame = await cardGameService.findById(id);
             res.json({cardGame})

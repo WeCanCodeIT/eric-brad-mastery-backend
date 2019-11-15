@@ -1,11 +1,16 @@
 const Review = require('../models/Review');
-const gameVariantService = require("../services/gamefamily-service");
+const GameVariantModel = require('../models/GameVariant');
+// const gameVariantService = require("../services/gamefamily-service");
 
 module.exports = {
-    async save(review) {
+    async save(review, gameVariantId) {
         try {
             const newReview = new Review(review);
+            const gameVariant = await GameVariantModel.findById(gameVariantId);
+            await gameVariant.stars.push(newReview);
+            await gameVariant.save();
             await newReview.save();
+            return newReview;
         } catch (error) {
             return error;
         }
@@ -22,7 +27,7 @@ module.exports = {
 
     async findById(id) {
         try {
-            const review = await review.findById(id);
+            const review = await Review.findById(id);
             return review
         } catch (error) {
             return error

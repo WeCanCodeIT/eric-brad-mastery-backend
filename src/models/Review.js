@@ -5,7 +5,7 @@ const Review = mongoose.model(
     new mongoose.Schema({
         title: {type: String, required: true},
         body: {type: String, required: true},
-        review: {type: String, enum: ["1", "2", "3", "4", "5"] }
+        stars: {type: String, enum: ["1", "2", "3", "4", "5"] }
     })
 )
 
