@@ -1,16 +1,26 @@
 const GameFamily = require('../models/GameFamily');
-const gameVariantService = require("../service/game-service");
+const cardGameService = require('./cardgame-service');
 
 module.exports = {
-    async save(gameFamily) {
+    async addCardVariant(cardFamilyId, newGameVariant) {
+        try {
+            const cardGame = await GameFamily.findById(cardFamilyId);
+            await cardGame.games.push(newGameVariant);
+            await cardGame.save();
+            return cardGame;
+        } catch(error) {
+            return error;
+        }
+    },
+    async addGameFamily(gameFamily, cardGameId) {
         try {
             const newGameFamily = new GameFamily(gameFamily)
             await newGameFamily.save();
-            return newGameFamily;
+            const updatedGame = await cardGameService.addCardFamily(cardGameId, newGameFamily)
+            return {updatedGame: updatedGame, newGameFamily: newGameFamily};
         } catch (err) {
             return err;
         }
-
     },
     async findAll() {
         try {

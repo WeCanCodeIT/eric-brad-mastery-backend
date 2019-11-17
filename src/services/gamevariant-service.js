@@ -1,5 +1,5 @@
 const GameVariant = require('../models/GameVariant');
-const gameFamilyService = require("../service/gamefamily-service");
+const gameFamilyService = require("../services/gamefamily-service");
 
 module.exports = {
     async save(gameVariant) {
@@ -36,7 +36,7 @@ module.exports = {
             return err;
         }
     }, 
-    async deleteGameVariant(gameVariantId){
+    async deleteGameVariant(gameVariantId) {
         /*  Needs Completed  */
         // try{
         //     const gameVariantToDelete = await GameVariant.findById(gameVariantId);
@@ -48,7 +48,6 @@ module.exports = {
         //     return response;
         // }catch(err){
         //     console.log(err)
-
         // }
     }
 };

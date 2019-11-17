@@ -1,7 +1,20 @@
+const mongoose = require('mongoose');
 const CardGame = require('../models/CardGame');
-const gameFamilyService = require("../service/gamefamily-service");
 
 module.exports = {
+    async addCardFamily(cardGameId, newGameFamily) {
+        console.log(cardGameId, newGameFamily)
+        try {
+            const cardGame = await CardGame.findById(cardGameId);
+            console.log(cardGame)
+            await cardGame.family.push(newGameFamily);
+            await cardGame.save();
+            return cardGame;
+        } catch(error) {
+            return error;
+        }
+    },
+
     async save(cardGame) {
         try {
             const newCardGame = new CardGame(cardGame)
@@ -47,7 +60,24 @@ module.exports = {
             return response;
         }catch(err){
             console.log(err)
+            return err;
 
         }
     }
 };
+// * Class version -- clean up if not needed before pushing to master *
+// class CardGameService {
+//     static async addCardFamily (cardGameId, newGameFamily) {
+//         console.log(cardGameId, newGameFamily)
+//         try {
+//             const cardGame = await CardGame.findById(cardGameId);
+//             console.log(cardGame)
+//             await cardGame.family.push(newGameFamily);
+//             await cardGame.save();
+//             return cardGame;
+//         } catch(error) {
+//             return error;
+//         }
+//     }
+// }
+// module.exports = CardGameService;
