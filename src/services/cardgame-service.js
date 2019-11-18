@@ -35,7 +35,7 @@ module.exports = {
     },
     async findById(id) {
         try {
-            const cardGame = await CardGame.findById(id);
+            const cardGame = await CardGame.findById(id).populate('family').exec();
             return cardGame
         } catch (error) {
             return error
